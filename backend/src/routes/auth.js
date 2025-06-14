@@ -50,7 +50,8 @@ Router.post("/login", (req, res) => {
 
         const payload = {
             email: foundDoc.email,
-            role: foundDoc.role
+            role: foundDoc.role,
+            _id: foundDoc._id
         }
 
         const token = jwt.sign(payload, process.env.SECRET, {
