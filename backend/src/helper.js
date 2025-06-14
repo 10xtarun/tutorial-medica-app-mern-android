@@ -1,4 +1,6 @@
 const nodemailer = require("nodemailer")
+const appwriteSdk = require("node-appwrite")
+const path = require("path")
 
 function sendMail(recieverEmailId, subject, body) {
     const transporter = nodemailer.createTransport({
@@ -28,6 +30,46 @@ function sendMail(recieverEmailId, subject, body) {
       })
 }
 
+function getEpochMilliSeconds(dateTimeString) {
+  let milliseconds = Date.parse(dateTimeString)
+
+  if(milliseconds == NaN) {
+    throw "invalid date time format"
+  }
+
+  return milliseconds
+}
+
+function checkIsDateTimeFuture(milliseconds) {
+  let currentMilliSeconds = Date.now()
+
+  if(milliseconds <= currentMilliSeconds) {
+    throw "date time cannot be of past"
+  }
+
+  return milliseconds
+}
+
+function setupAppWrite() {
+  const client = new appwriteSdk.Client()
+
+
+  client.setEndpoint(process.env.APPWRITE_ENDPOINT)
+  .setProject(process.env.APPWRITE_PROJECT)
+  .setKey(process.env.APPWRITE_KEY)
+
+  return client
+}
+
+function getReportFilePath(patientId, appointmentId, fileName) {
+  return patientId + "-" + Math.ceil(Math.random() *  1000) + "-" +  path.extname(fileName)
+}
+
+
 module.exports = {
-    sendMail
+    sendMail,
+    getEpochMilliSeconds,
+    checkIsDateTimeFuture,
+    setupAppWrite,
+    getReportFilePath
 }
