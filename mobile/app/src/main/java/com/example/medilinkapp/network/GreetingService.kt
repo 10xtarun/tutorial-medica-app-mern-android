@@ -32,7 +32,7 @@ class GreetingService {
     }
 
     // Base URL for the API
-    private val baseUrl = "https://bd16-150-107-16-195.ngrok-free.app"
+    private val baseUrl = "https://5a27-27-107-175-218.ngrok-free.app"
 
     /**
      * Fetches greeting message from the server

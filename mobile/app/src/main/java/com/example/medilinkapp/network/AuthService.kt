@@ -31,7 +31,7 @@ class AuthService {
         }
     }
 
-    private val baseUrl = "https://bd16-150-107-16-195.ngrok-free.app/v1"
+    private val baseUrl = "https://5a27-27-107-175-218.ngrok-free.app/v1"
 
     /**
      * Signs up a new user
